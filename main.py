@@ -13,7 +13,10 @@ def main():
     charwidth = dfio.get_term_width()
 
     for blockdevices in lsblk_json["blockdevices"]:
-        devices = blockdevices["children"]
+        try:
+            devices = blockdevices["children"]
+        except KeyError:
+            continue
 
         draw.draw_all(devices, disk_usage, charwidth)
 
