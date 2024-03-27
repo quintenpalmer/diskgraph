@@ -49,10 +49,10 @@ def draw_headers(devices, disk_usage, totalsize, charwidth):
         printraw('/', color='red')
         printraw(drawutil.format_bytes(local_disk_usage['space_total']))
 
-        local_disc_print_len = util.get_fixed_percent_bar_count(dev_size, totalsize, charwidth, greatest_size, deficit_len)
+        local_disk_print_len = util.get_fixed_percent_bar_count(dev_size, totalsize, charwidth, greatest_size, deficit_len)
 
         indent = indent + '│'
-        indent = indent + (' ' * (local_disc_print_len + 1))
+        indent = indent + (' ' * (local_disk_print_len + 1))
 
         print('')
 
@@ -66,9 +66,9 @@ def draw_bars(devices, disk_usage, totalsize, charwidth):
     for device in devices:
         dev_size = device["size"]
 
-        local_disc_print_len = util.get_fixed_percent_bar_count(dev_size, totalsize, charwidth, greatest_size, deficit_len)
+        local_disk_print_len = util.get_fixed_percent_bar_count(dev_size, totalsize, charwidth, greatest_size, deficit_len)
 
-        draw_bar_header(local_disc_print_len)
+        draw_bar_header(local_disk_print_len)
 
     print('')
 
@@ -85,9 +85,9 @@ def draw_bars(devices, disk_usage, totalsize, charwidth):
                 'space_avail': device["size"],
             }
 
-        local_disc_print_len = util.get_fixed_percent_bar_count(dev_size, totalsize, charwidth, greatest_size, deficit_len)
+        local_disk_print_len = util.get_fixed_percent_bar_count(dev_size, totalsize, charwidth, greatest_size, deficit_len)
 
-        draw_bar(local_disc_print_len, local_disk_usage)
+        draw_bar(local_disk_print_len, local_disk_usage)
 
     print('')
 
@@ -95,40 +95,40 @@ def draw_bars(devices, disk_usage, totalsize, charwidth):
     for device in devices:
         dev_size = device["size"]
 
-        local_disc_print_len = util.get_fixed_percent_bar_count(dev_size, totalsize, charwidth, greatest_size, deficit_len)
+        local_disk_print_len = util.get_fixed_percent_bar_count(dev_size, totalsize, charwidth, greatest_size, deficit_len)
 
-        draw_bar_footer(local_disc_print_len)
+        draw_bar_footer(local_disk_print_len)
 
 
     print('')
 
-def draw_bar_header(local_disc_print_len):
+def draw_bar_header(local_disk_print_len):
     """
     Draws the top of the bar, in blue.
     """
     printraw('┌', color='blue')
-    printraw('─' * local_disc_print_len, color='blue')
+    printraw('─' * local_disk_print_len, color='blue')
     printraw('┐', color='blue')
 
-def draw_bar(local_disc_print_len, local_disk_usage):
+def draw_bar(local_disk_print_len, local_disk_usage):
     """
     Draws the inner portion of the bar, with green bars for consumed disk space.
     """
-    used_disk_percent = local_disc_print_len * local_disk_usage['space_used'] / local_disk_usage['space_total']
+    used_disk_percent = local_disk_print_len * local_disk_usage['space_used'] / local_disk_usage['space_total']
     local_used_disk = (1 if used_disk_percent > 0 and int(used_disk_percent) == 0 else int(used_disk_percent))
 
-    # this should integer-friendily equal: int(local_disc_print_len * local_disk_usage['space_avail'] / local_disk_usage['space_total'])
-    local_unused_disk = local_disc_print_len - local_used_disk
+    # this should integer-friendily equal: int(local_disk_print_len * local_disk_usage['space_avail'] / local_disk_usage['space_total'])
+    local_unused_disk = local_disk_print_len - local_used_disk
 
     printraw('│', color='blue')
     printraw('█' * local_used_disk, color='green')
     printraw(' ' * local_unused_disk)
     printraw('│', color='blue')
 
-def draw_bar_footer(local_disc_print_len):
+def draw_bar_footer(local_disk_print_len):
     """
     Draws the bottom of the bar, in blue.
     """
     printraw('└', color='blue')
-    printraw('─' * local_disc_print_len, color='blue')
+    printraw('─' * local_disk_print_len, color='blue')
     printraw('┘', color='blue')

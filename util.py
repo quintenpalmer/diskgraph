@@ -24,11 +24,11 @@ def compute_deficit_and_greatest(devices, totalsize, charwidth):
     for device in devices:
         dev_size = device["size"]
 
-        local_disc_print_len = _get_raw_percent_bar_count(dev_size, totalsize, charwidth)
+        local_disk_print_len = _get_raw_percent_bar_count(dev_size, totalsize, charwidth)
 
-        if local_disc_print_len < 2:
-            local_disc_print_len = 2
-            deficit_len = deficit_len + (local_disc_print_len - 2)
+        if local_disk_print_len < 2:
+            local_disk_print_len = 2
+            deficit_len = deficit_len + (local_disk_print_len - 2)
         if dev_size > greatest_size:
             greatest_size = dev_size
 
@@ -40,16 +40,16 @@ def get_fixed_percent_bar_count(dev_size, totalsize, charwidth, greatest_size, d
     taking into account how many characters need to be subtracted from the largest device block
     with the total deficit_len.
     """
-    local_disc_print_len = _get_raw_percent_bar_count(dev_size, totalsize, charwidth)
+    local_disk_print_len = _get_raw_percent_bar_count(dev_size, totalsize, charwidth)
 
-    if local_disc_print_len < 2:
-        local_disc_print_len = 2
+    if local_disk_print_len < 2:
+        local_disk_print_len = 2
     if dev_size == greatest_size:
-        local_disc_print_len -= deficit_len
-    if local_disc_print_len > 4:
-        local_disc_print_len -= 4
+        local_disk_print_len -= deficit_len
+    if local_disk_print_len > 4:
+        local_disk_print_len -= 4
 
-    return local_disc_print_len
+    return local_disk_print_len
 
 def _get_raw_percent_bar_count(current, total, tofit):
     """
