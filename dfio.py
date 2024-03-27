@@ -10,7 +10,7 @@ def get_term_width():
     # we subtract 4 to give a bit of extra room
     # for the last device block on a device to print header info
     # this is totally a hack
-    charwidth = terminfo.columns - 4
+    charwidth = terminfo.columns - 8
 
     return charwidth
 
