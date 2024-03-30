@@ -1,4 +1,4 @@
-#!/bin/bash python
+#!/usr/bin/env python
 
 import dfio
 import draw
